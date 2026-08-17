@@ -1,0 +1,6 @@
+{
+  "name": "LevnéSklepy.cz - Moderní betonové sklepy přímo od výrobce",
+  "description": "Nový moderní web pro LevnéSklepy.cz s kompletním ceníkem klenutých a plochých betonových sklepů, interaktivním konfigurátorem, kalkulátorem dopravy, technickými výkresy a galerií realizací.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
