@@ -1,12 +1,11 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'klenute' | 'ploche' | 'vinotéky' | 'doplnky' | 'nadrze';
+  category: 'kupolove' | 'ploche-bok' | 'ploche-shora';
   categoryLabel: string;
   subtitle: string;
   description: string;
   basePriceCZK: number;
-  basePriceEUR: number;
   dimensions: {
     length: number; // in cm
     width: number;
@@ -31,393 +30,553 @@ export interface Accessory {
   id: string;
   name: string;
   priceCZK: number;
-  priceEUR: number;
-  category: 'dvere' | 'schody' | 'ventilace' | 'izolace' | 'elektro' | 'police';
+  category: 'predsin' | 'schody' | 'dvere';
   description: string;
   unit: string;
   iconName: string;
 }
 
+// Ceny jsou uvedeny bez DPH, dle aktuálního ceníku výrobce (levnesklepy.cz).
+
 export const PRODUCTS: Product[] = [
+  // ── KUPOLOVÉ SKLEPY ─────────────────────────────────────────────
   {
-    id: 'klenuty-standard-300',
-    name: 'Klenutý sklep Standard 300',
-    category: 'klenute',
-    categoryLabel: 'Klenuté sklepy',
-    subtitle: 'Nejpopulárnější klenutý zahradní sklep pro uskladnění úrody a vína',
-    description: 'Monolitický prefabrikovaný železobetonový sklep s půlkruhovou klenbou. Klenutý strop poskytuje vynikající statickou nosnost, ideální cirkulaci vzduchu a stálé vnitřní klima (8–12 °C) po celý rok.',
-    basePriceCZK: 62000,
-    basePriceEUR: 2480,
-    dimensions: {
-      length: 300,
-      width: 240,
-      height: 250,
-      innerLength: 280,
-      innerWidth: 220,
-      innerHeight: 235
-    },
-    volumeM3: 18,
+    id: 'kupolovy-300',
+    name: 'Kupolový sklep 300',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Nejoblíbenější kupolový sklep se stálou teplotou a vlhkostí',
+    description: 'Kupolovitý tvar zajišťuje přirozené proudění vzduchu a pomáhá udržovat stálou teplotu i vlhkost po celý rok. Konstrukce z vyztuženého betonu B35 zaručuje dlouhou životnost a minimální nároky na údržbu.',
+    basePriceCZK: 42000,
+    dimensions: { length: 300, width: 240, height: 240, innerLength: 280, innerWidth: 220, innerHeight: 220 },
+    volumeM3: 17.3,
     weightTons: 9.5,
     wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    concreteClass: 'Železobeton B35',
     features: [
-      'Půlkruhová klenba s vysokou nosností zásypu (až 2,5 m zeminy)',
-      'Čelní vstup se zpevněným překladem a zárubní',
-      'Příprava na gravitační ventilaci (2× prostup DN 110)',
-      'Dvojitá hydroizolace vnějších stěn z výroby',
-      'Masivní ocelová armatura z žebírkové oceli B500'
+      'Kupolovitý strop pro přirozené proudění vzduchu',
+      'Vyztužený beton B35 odolný vůči vlhkosti a mrazu',
+      'Dlouhá životnost s minimální údržbou',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Zahrady rodinných domů', 'Uskladnění brambor a jablek', 'Domácí vinotéka', 'Zahradní chladírna'],
+    recommendedFor: ['Zahrady rodinných domů', 'Uskladnění úrody', 'Domácí sklípek'],
     imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1000&q=80',
     isPopular: true,
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'klenuty-maxi-350',
-    name: 'Klenutý sklep Maxi 350',
-    category: 'klenute',
-    categoryLabel: 'Klenuté sklepy',
-    subtitle: 'Prostorný klenutý sklep s prodlouženým tělem a velkou kapacitou',
-    description: 'Zvětšená verze klenutého sklepa s délkou 3,5 metru. Poskytuje dostatek prostoru jak pro regály na potraviny, tak pro regálový systém na víno a posezení s přáteli.',
-    basePriceCZK: 68000,
-    basePriceEUR: 2720,
-    dimensions: {
-      length: 350,
-      width: 240,
-      height: 250,
-      innerLength: 330,
-      innerWidth: 220,
-      innerHeight: 235
-    },
-    volumeM3: 21,
-    weightTons: 11.2,
+    id: 'kupolovy-340-a',
+    name: 'Kupolový sklep 340 (nižší)',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Prodloužený kupolový sklep s nižší konstrukční výškou',
+    description: 'Kupolový sklep s délkou 340 cm a nižší výškou pro pozemky s omezenou hloubkou výkopu. Zachovává výhody kupolovité klenby a stálého mikroklimatu.',
+    basePriceCZK: 48000,
+    dimensions: { length: 340, width: 240, height: 230, innerLength: 320, innerWidth: 220, innerHeight: 210 },
+    volumeM3: 18.8,
+    weightTons: 10.3,
     wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    concreteClass: 'Železobeton B35',
     features: [
-      'Užitná plocha cca 7,5 m² s vysokým stropem',
-      'Přirozená regulace vlhkosti 75–85 % vhodná pro zrání vína',
-      'Možnost dovybavení prefabrikovaným vstupním schodištěm',
-      'Odolnost vůči mrazu a tlakové vodě',
-      'Rychlé usazení hydraulickou rukou za 45 minut'
+      'Kupolovitý strop pro přirozené proudění vzduchu',
+      'Nižší konstrukční výška vhodná pro mělčí výkop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Vinaři a sběratelé', 'Větší rodinné zahrady', 'Úschovna zavařenin a zeleniny'],
+    recommendedFor: ['Zahrady rodinných domů', 'Uskladnění úrody', 'Domácí sklípek'],
     imageUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80',
-    isPopular: true,
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'klenuty-grand-400',
-    name: 'Klenutý sklep Grand 400',
-    category: 'klenute',
-    categoryLabel: 'Klenuté sklepy',
-    subtitle: 'Největší jednodílný klenutý sklep na trhu o délce 4 metry',
-    description: 'Špičkový klenutý monolit pro náročné klienty a pěstitele. Umožňuje plnohodnotné rozdělení na potravinovou a společensko-degustační část.',
-    basePriceCZK: 76000,
-    basePriceEUR: 3040,
-    dimensions: {
-      length: 400,
-      width: 240,
-      height: 250,
-      innerLength: 380,
-      innerWidth: 220,
-      innerHeight: 235
-    },
-    volumeM3: 24,
-    weightTons: 13.0,
-    wallThicknessCm: 11,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    id: 'kupolovy-340-b',
+    name: 'Kupolový sklep 340 (vyšší)',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Prodloužený kupolový sklep s vyšší konstrukční výškou',
+    description: 'Verze kupolového sklepa 340 cm s vyšší klenbou pro pohodlnější stání a více úložného prostoru nad regály.',
+    basePriceCZK: 51000,
+    dimensions: { length: 340, width: 240, height: 250, innerLength: 320, innerWidth: 220, innerHeight: 230 },
+    volumeM3: 20.4,
+    weightTons: 11.2,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
     features: [
-      'Prostor pro až 600 lahví vína a 15 velkých přepravek',
-      'Extra zesílené stěny s dvojitou armovací sítí',
-      'Příprava pro instalaci osvětlení a rozvodů',
-      'Záruka na těsnost a konstrukci 5 let',
-      'Možnost napojení klenuté vstupní šíje'
+      'Vyšší kupolovitý strop pro pohodlnější stání',
+      'Vyztužený beton B35',
+      'Dlouhá životnost s minimální údržbou',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Privátní vinné sklípky', 'Hospodářská stavení', 'Restaurace a penziony'],
+    recommendedFor: ['Zahrady rodinných domů', 'Uskladnění úrody', 'Domácí sklípek'],
     imageUrl: 'https://images.unsplash.com/photo-1528823872057-9c018a7a7553?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'klenuty-bocni-vstup-350',
-    name: 'Klenutý sklep s bočním vstupem 350',
-    category: 'klenute',
-    categoryLabel: 'Klenuté sklepy',
-    subtitle: 'Klenutý sklep se vstupem na delší boční straně pro specifický terén',
-    description: 'Ideální řešení pro instalaci ve svahu nebo u plotu, kde není možný čelní přístup. Zachovává veškeré výhody klenutého stropu s upravenou dispozicí vstupu.',
-    basePriceCZK: 72000,
-    basePriceEUR: 2880,
-    dimensions: {
-      length: 350,
-      width: 250,
-      height: 260,
-      innerLength: 330,
-      innerWidth: 230,
-      innerHeight: 240
-    },
-    volumeM3: 22,
-    weightTons: 12.0,
+    id: 'kupolovy-390',
+    name: 'Kupolový sklep 390',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Prostorný kupolový sklep s délkou téměř 4 metry',
+    description: 'Zvětšená verze kupolového sklepa s délkou 390 cm poskytující dostatek prostoru pro regály i větší množství zásob.',
+    basePriceCZK: 58000,
+    dimensions: { length: 390, width: 240, height: 250, innerLength: 370, innerWidth: 220, innerHeight: 230 },
+    volumeM3: 23.4,
+    weightTons: 12.9,
     wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    concreteClass: 'Železobeton B35',
     features: [
-      'Boční vstup umožňující symetrické rozdělení vnitřku vlevo/vpravo',
-      'Vhodné pro zapuštění do svahovitého pozemku',
-      'Masivní překlad a integrované odtokové žlábky',
-      '100% vodotěsný a odolný vůči zemní vlhkosti'
+      'Kupolovitý strop pro přirozené proudění vzduchu',
+      'Velkorysý vnitřní prostor',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Svažité pozemky', 'Úzké zahrady', 'Vinné archivy'],
+    recommendedFor: ['Větší rodinné zahrady', 'Uskladnění úrody', 'Domácí sklípek'],
     imageUrl: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'plochy-bocni-300',
-    name: 'Plochý sklep s bočním vstupem 300',
-    category: 'ploche',
-    categoryLabel: 'Ploché sklepy',
-    subtitle: 'Kompaktní sklep s rovnou pochozí/pojezdovou stropní deskou',
-    description: 'Prefabrikovaný sklep s rovnou střechou. Horní stropní desku lze využít jako základ pro zahradní altán, terasu, vyvýšený záhon nebo pochozí dlažbu.',
-    basePriceCZK: 54000,
-    basePriceEUR: 2160,
-    dimensions: {
-      length: 300,
-      width: 240,
-      height: 210,
-      innerLength: 280,
-      innerWidth: 220,
-      innerHeight: 195
-    },
-    volumeM3: 15,
-    weightTons: 8.5,
-    wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    id: 'kupolovy-450',
+    name: 'Kupolový sklep 450',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Největší kupolový sklep v nabídce, délka 450 cm',
+    description: 'Vlajkový model kupolových sklepů s délkou 4,5 metru pro náročné klienty vyžadující maximální úložnou kapacitu.',
+    basePriceCZK: 74000,
+    dimensions: { length: 450, width: 250, height: 245, innerLength: 430, innerWidth: 230, innerHeight: 225 },
+    volumeM3: 27.6,
+    weightTons: 15.2,
+    wallThicknessCm: 11,
+    concreteClass: 'Železobeton B35',
     features: [
-      'Plochá stropní deska s možností nadzemního využití',
-      'Pohodlný boční vchod pro chůzi bez ohýbání',
-      'Nízká stavební výška vhodná při vyšší hladině spodní vody',
-      'Snadná montáž a rychlé zásypy'
+      'Nejprostornější kupolový model v nabídce',
+      'Kupolovitý strop pro přirozené proudění vzduchu',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Menší městské zahrady', 'Umístění pod terasu či pergolu', 'Sklad nářadí i úrody'],
+    recommendedFor: ['Rozsáhlé pozemky', 'Vinaři a sběratelé', 'Hospodářská stavení'],
+    imageUrl: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+
+  // ── PLOCHÉ SKLEPY – VSTUP Z BOKU ────────────────────────────────
+  {
+    id: 'plochy-bok-240',
+    name: 'Plochý sklep s bočním vstupem 240',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Nejmenší a nejdostupnější plochý sklep s bočním vchodem',
+    description: 'Kompaktní betonový sklep s rovnou střechou a bočním vstupem. Praktické a cenově nejdostupnější řešení pro menší zahrady.',
+    basePriceCZK: 34000,
+    dimensions: { length: 240, width: 200, height: 218 },
+    volumeM3: 10.5,
+    weightTons: 5.8,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Rovná stropní deska s možností dalšího využití',
+      'Boční vstup pro pohodlnou manipulaci',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Menší zahrady', 'Sklad nářadí i úrody'],
     imageUrl: 'https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=1000&q=80',
     isPopular: true,
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'plochy-bocni-350',
-    name: 'Plochý sklep s bočním vstupem 350',
-    category: 'ploche',
-    categoryLabel: 'Ploché sklepy',
-    subtitle: 'Rozšířený plochý sklep s maximální užitnou rovnou plochou',
-    description: 'Všestranný železobetonový sklep o délce 350 cm. Rovné stěny usnadňují montáž standardizovaných policových systémů a regálů podél obou stěn.',
-    basePriceCZK: 59000,
-    basePriceEUR: 2360,
-    dimensions: {
-      length: 350,
-      width: 240,
-      height: 210,
-      innerLength: 330,
-      innerWidth: 220,
-      innerHeight: 195
-    },
-    volumeM3: 17.5,
-    weightTons: 9.8,
+    id: 'plochy-bok-300-a',
+    name: 'Plochý sklep s bočním vstupem 300',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Standardní plochý sklep s rovnou stropní deskou',
+    description: 'Prefabrikovaný sklep s rovnou střechou a délkou 300 cm. Horní deska poslouží i jako základ pro terasu či pochozí plochu.',
+    basePriceCZK: 41000,
+    dimensions: { length: 300, width: 240, height: 218 },
+    volumeM3: 15.7,
+    weightTons: 8.6,
     wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    concreteClass: 'Železobeton B35',
     features: [
-      'Rovné pravoúhlé stěny pro maximální efektivitu regálů',
-      'Nosnost stropní desky dimenzována na pochozí zátěž i zeminu',
-      'Izolační nátěr s dlouhou životností',
-      'Montáž bez nutnosti autojeřábu přímo z kamionu'
+      'Rovná stropní deska s možností nadzemního využití',
+      'Boční vstup pro pohodlnou manipulaci',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Rodinné domy', 'Zahradníci', 'Sklady techniky a potravin'],
+    recommendedFor: ['Rodinné domy', 'Sklad nářadí i úrody'],
     imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'plochy-horni-vstup-300',
-    name: 'Plochý sklep s horním vstupem (šachta/poklop)',
-    category: 'ploche',
-    categoryLabel: 'Ploché sklepy',
-    subtitle: 'Diskrétní podzemní sklep se vstupem shora pro minimální zábor místa',
-    description: 'Sklep zapuštěný zcela pod úroveň terénu s přístupem přes stropní inspekční šachtu a žebřík / strmé schůdky. Na povrchu je viditelný pouze zateplený poklop.',
-    basePriceCZK: 51000,
-    basePriceEUR: 2040,
-    dimensions: {
-      length: 300,
-      width: 240,
-      height: 210,
-      innerLength: 280,
-      innerWidth: 220,
-      innerHeight: 195
-    },
-    volumeM3: 15,
-    weightTons: 8.2,
+    id: 'plochy-bok-300-b',
+    name: 'Plochý sklep s bočním vstupem 300 (vyšší)',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Plochý sklep 300 cm s vyšší konstrukční výškou',
+    description: 'Verze plochého sklepa 300 cm s vyšší konstrukční výškou pro pohodlnější stání a více místa na regály.',
+    basePriceCZK: 45000,
+    dimensions: { length: 300, width: 240, height: 232 },
+    volumeM3: 16.7,
+    weightTons: 9.2,
     wallThicknessCm: 10,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    concreteClass: 'Železobeton B35',
     features: [
-      'Nevyžaduje žádný terénní svah ani zářez do zahrady',
-      'Vstup přes horní poklop 80 × 80 cm s plynovými vzpěrami',
-      'Nenápadné řešení – trávník nebo dlažba vede přímo kolem',
-      'Příprava pro závěsné žebříky nebo skládací schůdky'
+      'Vyšší konstrukční výška pro pohodlnější stání',
+      'Boční vstup pro pohodlnou manipulaci',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Rovinaté parcely', 'Malé pozemky', 'Tajný trezor / sklad cenností'],
+    recommendedFor: ['Rodinné domy', 'Sklad nářadí i úrody'],
     imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'vinoteka-dvoumodul-600',
-    name: 'Modulární vinný sklep & vinotéka 600',
-    category: 'vinotéky',
-    categoryLabel: 'Vinné & Modulární sklepy',
-    subtitle: 'Exkluzivní propojený dvoudílný sklep s degustačním sálem',
-    description: 'Profesionální dvoudílná klenutá sestava o celkové délce 6 metrů. Skládá se ze dvou monolitických klenutých segmentů spojených speciálním vodonepropustným dilatačním tmelem. Ideální jako soukromý vinný archiv i degustační salonek.',
-    basePriceCZK: 124000,
-    basePriceEUR: 4960,
-    dimensions: {
-      length: 600,
-      width: 240,
-      height: 250,
-      innerLength: 560,
-      innerWidth: 220,
-      innerHeight: 235
-    },
-    volumeM3: 36,
-    weightTons: 19.0,
-    wallThicknessCm: 11,
-    concreteClass: 'C30/37 (B30/B35) W8 vodostavební',
+    id: 'plochy-bok-340',
+    name: 'Plochý sklep s bočním vstupem 340',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Prostornější plochý sklep s délkou 340 cm',
+    description: 'Rozšířený plochý sklep s délkou 340 cm. Rovné stěny usnadňují montáž regálů podél obou stran.',
+    basePriceCZK: 46000,
+    dimensions: { length: 340, width: 240, height: 225 },
+    volumeM3: 18.4,
+    weightTons: 10.1,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
     features: [
-      'Obrovský vnitřní prostor přes 12 m² s klenutým stropem',
-      'Dvě funkční zóny: Degustační posezení + Archiv vín',
-      'Těsnicí systém s hydrofobními páskami a kompozitním zámkem',
-      'Nadstandardní mikroklima s přirozenou vlhkostí',
-      'Reprezentativní vzhled po obezdění lícovými cihlami'
+      'Rovné stěny pro efektivní rozmístění regálů',
+      'Boční vstup pro pohodlnou manipulaci',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Sběratelé vín', 'Penziony a agroturistika', 'Exkluzivní rezidence'],
-    imageUrl: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1000&q=80',
+    recommendedFor: ['Rodinné domy', 'Zahradníci'],
+    imageUrl: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-bok-390-mod',
+    name: 'Modulární plochý sklep 390',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Modulární plochý sklep s délkou 390 cm',
+    description: 'Modulární řada plochých sklepů s délkou 390 cm nabízí větší kapacitu při zachování rovné, dobře využitelné stropní desky.',
+    basePriceCZK: 55000,
+    dimensions: { length: 390, width: 240, height: 235 },
+    volumeM3: 22,
+    weightTons: 12.1,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Modulární řada s větší kapacitou',
+      'Boční vstup pro pohodlnou manipulaci',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Větší rodinné zahrady', 'Zahradníci'],
+    imageUrl: 'https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=1000&q=80',
     isNew: true,
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
   {
-    id: 'nadrz-destova-voda-10m3',
-    name: 'Betonová nádrž na dešťovou vodu 10 m³',
-    category: 'nadrze',
-    categoryLabel: 'Jímky & Nádrže',
-    subtitle: 'Monolitická samonosná nádrž s atestem nepropustnosti a filtrem',
-    description: 'Vodotěsná železobetonová nádrž pro akumulaci dešťové vody nebo jako bezodtoková jímka/žumpa. 100% samonosná bez nutnosti obetonování, odolná vůči tlaku zeminy i spodní vodě.',
-    basePriceCZK: 36000,
-    basePriceEUR: 1440,
-    dimensions: {
-      length: 300,
-      width: 240,
-      height: 180
-    },
-    volumeM3: 10,
-    weightTons: 6.5,
-    wallThicknessCm: 10,
-    concreteClass: 'C30/37 W8 vodostavební',
+    id: 'plochy-bok-450-mod',
+    name: 'Modulární plochý sklep 450',
+    category: 'ploche-bok',
+    categoryLabel: 'Ploché sklepy – vstup z boku',
+    subtitle: 'Největší modulární plochý sklep, délka 450 cm',
+    description: 'Vlajkový model modulární řady plochých sklepů s délkou 4,5 metru pro maximální úložnou kapacitu.',
+    basePriceCZK: 74000,
+    dimensions: { length: 450, width: 250, height: 245.5 },
+    volumeM3: 27.6,
+    weightTons: 15.2,
+    wallThicknessCm: 11,
+    concreteClass: 'Železobeton B35',
     features: [
-      '100% vodotěsnost s certifikátem TZÚS',
-      'Včetně pochozí betonové desky a komínu 50 cm s poklopem',
-      'Možnost napojení čerpadel a filtračních košů',
-      'Montáž z auta s hydraulickou rukou ZDARMA'
+      'Nejprostornější model plochých sklepů s bočním vstupem',
+      'Modulární konstrukce',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
     ],
-    recommendedFor: ['Zálivka zahrady', 'Splachování WC dešťovkou', 'Žumpy u chat a domů'],
-    imageUrl: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
+    recommendedFor: ['Rozsáhlé pozemky', 'Zahradníci'],
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+
+  // ── PLOCHÉ SKLEPY – VSTUP SHORA ─────────────────────────────────
+  {
+    id: 'plochy-shora-240',
+    name: 'Plochý sklep s horním vstupem 240',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Nejmenší plochý sklep se vstupem přes horní poklop',
+    description: 'Betonový sklep s rovnou střechou a horním vstupem je optimální pro lokality s omezeným prostorem – nevyžaduje boční přístup ani svah.',
+    basePriceCZK: 34000,
+    dimensions: { length: 240, width: 200, height: 218 },
+    volumeM3: 10.5,
+    weightTons: 5.8,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Vstup přes horní poklop – žádný zábor místa na pozemku',
+      'Vhodné pro rovinaté i stísněné parcely',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Menší pozemky', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-300-a',
+    name: 'Plochý sklep s horním vstupem 300',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Standardní plochý sklep se vstupem shora',
+    description: 'Sklep zapuštěný pod úroveň terénu s přístupem přes stropní poklop. Na povrchu zůstává viditelný pouze zateplený vstupní otvor.',
+    basePriceCZK: 41000,
+    dimensions: { length: 300, width: 240, height: 218 },
+    volumeM3: 15.7,
+    weightTons: 8.6,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Vstup přes horní poklop – žádný zábor místa na pozemku',
+      'Nenápadné řešení, trávník lze vést až k poklopu',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Rovinaté parcely', 'Malé pozemky'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    isPopular: true,
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-300-b',
+    name: 'Plochý sklep s horním vstupem 300 (vyšší)',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Plochý sklep 300 cm s vyšší konstrukční výškou',
+    description: 'Verze plochého sklepa se vstupem shora a vyšší konstrukční výškou pro pohodlnější pohyb uvnitř.',
+    basePriceCZK: 45000,
+    dimensions: { length: 300, width: 240, height: 232 },
+    volumeM3: 16.7,
+    weightTons: 9.2,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Vyšší konstrukční výška',
+      'Vstup přes horní poklop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Rovinaté parcely', 'Malé pozemky'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-340',
+    name: 'Plochý sklep s horním vstupem 340',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Prostornější plochý sklep se vstupem shora, délka 340 cm',
+    description: 'Rozšířený plochý sklep se vstupem přes horní poklop a délkou 340 cm pro větší úložnou kapacitu.',
+    basePriceCZK: 46000,
+    dimensions: { length: 340, width: 240, height: 225 },
+    volumeM3: 18.4,
+    weightTons: 10.1,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Vstup přes horní poklop',
+      'Větší úložná kapacita',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Rovinaté parcely', 'Malé pozemky'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-390-mod',
+    name: 'Modulární plochý sklep 390 se vstupem shora',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Modulární plochý sklep se vstupem shora, délka 390 cm',
+    description: 'Modulární řada plochých sklepů se vstupem přes horní poklop a délkou 390 cm.',
+    basePriceCZK: 55000,
+    dimensions: { length: 390, width: 240, height: 235 },
+    volumeM3: 22,
+    weightTons: 12.1,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Modulární řada s větší kapacitou',
+      'Vstup přes horní poklop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Větší rodinné zahrady', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-450-mod',
+    name: 'Modulární plochý sklep 450 se vstupem shora',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Největší modulární plochý sklep se vstupem shora',
+    description: 'Vlajkový model modulární řady se vstupem přes horní poklop a délkou 4,5 metru.',
+    basePriceCZK: 74000,
+    dimensions: { length: 450, width: 250, height: 245.5 },
+    volumeM3: 27.6,
+    weightTons: 15.2,
+    wallThicknessCm: 11,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Nejprostornější model se vstupem shora',
+      'Modulární konstrukce',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Rozsáhlé pozemky', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-300-operna',
+    name: 'Plochý sklep 300 s opěrnou stěnou na desce',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Provedení s opěrnou stěnou na základové desce',
+    description: 'Varianta plochého sklepa se vstupem shora a opěrnou stěnou přímo na základové desce – vhodné pro svažitější terén kolem vstupu.',
+    basePriceCZK: 43500,
+    dimensions: { length: 300, width: 240, height: 218 },
+    volumeM3: 15.7,
+    weightTons: 8.6,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Opěrná stěna na základové desce',
+      'Vstup přes horní poklop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Svažité pozemky', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-340-operna',
+    name: 'Plochý sklep 340 s opěrnou stěnou na desce',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Prostornější provedení s opěrnou stěnou na základové desce',
+    description: 'Rozšířená varianta plochého sklepa se vstupem shora, opěrnou stěnou na základové desce a délkou 340 cm.',
+    basePriceCZK: 49500,
+    dimensions: { length: 340, width: 240, height: 225 },
+    volumeM3: 18.4,
+    weightTons: 10.1,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Opěrná stěna na základové desce',
+      'Vstup přes horní poklop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Svažité pozemky', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
+  {
+    id: 'plochy-shora-300-bez-desky',
+    name: 'Plochý sklep 300 bez základové desky',
+    category: 'ploche-shora',
+    categoryLabel: 'Ploché sklepy – vstup shora',
+    subtitle: 'Provedení bez základové desky pro vlastní betonáž základu',
+    description: 'Varianta plochého sklepa se vstupem shora bez přiložené základové desky – vhodné, pokud si zákazník připravuje vlastní základovou konstrukci.',
+    basePriceCZK: 39000,
+    dimensions: { length: 300, width: 240, height: 232 },
+    volumeM3: 16.7,
+    weightTons: 9.2,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Bez základové desky – nižší cena',
+      'Vstup přes horní poklop',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Vlastní příprava základu', 'Rovinaté parcely'],
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   }
 ];
 
 export const ACCESSORIES: Accessory[] = [
   {
-    id: 'dvere-ocel-zateplene',
-    name: 'Zateplené ocelové dveře s těsněním a zámkem FAB',
-    priceCZK: 8500,
-    priceEUR: 340,
-    category: 'dvere',
-    description: 'Kvalitní lakované ocelové křídlo vyplněné PU pěnou s obvodovým pryžovým těsněním a klikou FAB.',
-    unit: 'ks',
-    iconName: 'DoorClosed'
-  },
-  {
-    id: 'dvere-dub-masiv',
-    name: 'Prémiové masivní dubové dveře s kovanými panty',
-    priceCZK: 14500,
-    priceEUR: 580,
-    category: 'dvere',
-    description: 'Stylové řemeslné dřevěné dveře s historizujícím kováním – ideální pro vinné sklepy.',
+    id: 'kopulova-predsin',
+    name: 'Kopulová předsíň',
+    priceCZK: 20000,
+    category: 'predsin',
+    description: 'Kupolovitá vstupní předsíň chránící vchod do sklepa před deštěm, sněhem a mrazem.',
     unit: 'ks',
     iconName: 'DoorOpen'
   },
   {
-    id: 'schody-beton-monolit',
-    name: 'Prefabrikované betonové schodiště (5 stupňů)',
-    priceCZK: 6000,
-    priceEUR: 240,
+    id: 'kopulova-predsin-schody',
+    name: 'Kopulová předsíň se schody',
+    priceCZK: 27500,
+    category: 'predsin',
+    description: 'Kupolovitá vstupní předsíň s integrovaným prefabrikovaným schodištěm.',
+    unit: 'ks',
+    iconName: 'Maximize2'
+  },
+  {
+    id: 'schody',
+    name: 'Schody',
+    priceCZK: 20000,
     category: 'schody',
-    description: 'Masivní železobetonové schody s protiskluzovým drážkováním přizpůsobené výšce sklepa.',
+    description: 'Prefabrikované betonové schodiště přizpůsobené výšce zvoleného sklepa.',
     unit: 'sada',
     iconName: 'Footprints'
   },
   {
-    id: 'schody-klenuta-predsien',
-    name: 'Klenutá vstupní šíje (předsíň) se schodištěm',
-    priceCZK: 18000,
-    priceEUR: 720,
-    category: 'schody',
-    description: 'Prodloužená klenutá chodba s integrovaným schodištěm chránící vstup před deštěm a mrazem.',
-    unit: 'komplet',
-    iconName: 'Maximize2'
-  },
-  {
-    id: 'ventilace-gravitacni',
-    name: 'Dvouokruhová gravitační ventilace (nátok + odtah DN 110)',
-    priceCZK: 2500,
-    priceEUR: 100,
-    category: 'ventilace',
-    description: 'PVC potrubí se stříškami a nerezovou mřížkou proti hlodavcům zajišťující stálý tah a čerstvý vzduch.',
-    unit: 'sada',
-    iconName: 'Wind'
-  },
-  {
-    id: 'izolace-hydrostop-extra',
-    name: 'Vnější penetrační a asfaltová hydroizolace HYDROSTOP',
-    priceCZK: 3500,
-    priceEUR: 140,
-    category: 'izolace',
-    description: 'Aplikace elastického bezešvého hydroizolačního nátěru pro maximální ochranu ve vlhkém podloží.',
-    unit: 'aplikace',
-    iconName: 'ShieldCheck'
-  },
-  {
-    id: 'elektro-priprava-led',
-    name: 'Elektroinstalační příprava s IP65 LED osvětlením',
-    priceCZK: 3200,
-    priceEUR: 128,
-    category: 'elektro',
-    description: 'Kabelové průchodky, vodotěsný vypínač a odolné hermetické LED svítidlo se studeným/teplým světlem.',
-    unit: 'sada',
-    iconName: 'Lightbulb'
-  },
-  {
-    id: 'regaly-drevo-modul',
-    name: 'Dřevěné smrkové regály na zavařeniny a přepravky (2 m)',
-    priceCZK: 4800,
-    priceEUR: 192,
-    category: 'police',
-    description: 'Tlakově impregnované robustní regály se 4 policemi a vysokou nosností až 120 kg na polici.',
+    id: 'rovne-dvere',
+    name: 'Rovné dveře',
+    priceCZK: 18500,
+    category: 'dvere',
+    description: 'Standardní vstupní dveře pro betonový sklep.',
     unit: 'ks',
-    iconName: 'Grid'
+    iconName: 'DoorClosed'
+  },
+  {
+    id: 'dvere-kupolovy-sklep',
+    name: 'Dveře pro kupolový sklep',
+    priceCZK: 20000,
+    category: 'dvere',
+    description: 'Dveře tvarované speciálně pro vstup kupolového sklepa.',
+    unit: 'ks',
+    iconName: 'DoorClosed'
+  },
+  {
+    id: 'dvere-kupolova-predsin',
+    name: 'Dveře pro kupolovou předsíň',
+    priceCZK: 20000,
+    category: 'dvere',
+    description: 'Vstupní dveře osazené do kupolové předsíně.',
+    unit: 'ks',
+    iconName: 'DoorClosed'
   }
 ];
 
 export const REGIONS_SHIPPING = [
-  { name: 'Jihomoravský kraj (Brno, Znojmo, Břeclav)', distancePriceCZK: 4500, distancePriceEUR: 180 },
-  { name: 'Středočeský kraj & Praha', distancePriceCZK: 5000, distancePriceEUR: 200 },
-  { name: 'Vysočina (Jihlava, Třebíč, Havl. Brod)', distancePriceCZK: 4800, distancePriceEUR: 192 },
-  { name: 'Olomoucký & Zlínský kraj', distancePriceCZK: 4200, distancePriceEUR: 168 },
-  { name: 'Moravskoslezský kraj (Ostrava, Opava)', distancePriceCZK: 4900, distancePriceEUR: 196 },
-  { name: 'Jihočeský kraj (Č. Budějovice, Tábor)', distancePriceCZK: 5500, distancePriceEUR: 220 },
-  { name: 'Plzeňský & Karlovarský kraj', distancePriceCZK: 6200, distancePriceEUR: 248 },
-  { name: 'Ústecký & Liberecký kraj', distancePriceCZK: 5800, distancePriceEUR: 232 },
-  { name: 'Královéhradecký & Pardubický kraj', distancePriceCZK: 4900, distancePriceEUR: 196 },
-  { name: 'Západní Slovensko (Bratislava, Trnava, Trenčín)', distancePriceCZK: 5500, distancePriceEUR: 220 },
-  { name: 'Střední a Východní Slovensko (Žilina, B. Bystrica, Košice)', distancePriceCZK: 6800, distancePriceEUR: 272 }
+  { name: 'Jihomoravský kraj (Brno, Znojmo, Břeclav)', distancePriceCZK: 4500 },
+  { name: 'Středočeský kraj & Praha', distancePriceCZK: 5000 },
+  { name: 'Vysočina (Jihlava, Třebíč, Havl. Brod)', distancePriceCZK: 4800 },
+  { name: 'Olomoucký & Zlínský kraj', distancePriceCZK: 4200 },
+  { name: 'Moravskoslezský kraj (Ostrava, Opava)', distancePriceCZK: 4900 },
+  { name: 'Jihočeský kraj (Č. Budějovice, Tábor)', distancePriceCZK: 5500 },
+  { name: 'Plzeňský & Karlovarský kraj', distancePriceCZK: 6200 },
+  { name: 'Ústecký & Liberecký kraj', distancePriceCZK: 5800 },
+  { name: 'Královéhradecký & Pardubický kraj', distancePriceCZK: 4900 },
+  { name: 'Západní Slovensko (Bratislava, Trnava, Trenčín)', distancePriceCZK: 5500 },
+  { name: 'Střední a Východní Slovensko (Žilina, B. Bystrica, Košice)', distancePriceCZK: 6800 }
 ];
