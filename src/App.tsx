@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -18,27 +18,22 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { Calculator, Phone } from 'lucide-react';
 
 export default function App() {
-  const [currency, setCurrency] = useState<'CZK' | 'EUR'>('CZK');
-
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#3E2723] flex flex-col font-sans selection:bg-[#795548] selection:text-white">
       {/* Scroll restoration helper */}
       <ScrollToTop />
 
       {/* Top Navigation Bar with exact Logo & Routing Links */}
-      <Navbar
-        currency={currency}
-        setCurrency={setCurrency}
-      />
+      <Navbar />
 
       {/* Standalone Route Pages */}
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<HomePage currency={currency} />} />
-          <Route path="/sklepy" element={<ProductsPage currency={currency} />} />
-          <Route path="/sklepy/:id" element={<ProductDetailPage currency={currency} />} />
-          <Route path="/konfigurator" element={<ConfiguratorPage currency={currency} />} />
-          <Route path="/cenik" element={<PriceListPage currency={currency} />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/sklepy" element={<ProductsPage />} />
+          <Route path="/sklepy/:id" element={<ProductDetailPage />} />
+          <Route path="/konfigurator" element={<ConfiguratorPage />} />
+          <Route path="/cenik" element={<PriceListPage />} />
           <Route path="/sluzby" element={<ServicesPage />} />
           <Route path="/postup" element={<ProcessPage />} />
           <Route path="/priprava-vykopu" element={<ProcessPage />} />
