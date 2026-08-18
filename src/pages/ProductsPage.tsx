@@ -15,21 +15,16 @@ import {
   Calculator
 } from 'lucide-react';
 
-interface ProductsPageProps {
-  currency: 'CZK' | 'EUR';
-}
-
-export const ProductsPage: React.FC<ProductsPageProps> = ({ currency }) => {
+export const ProductsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const navigate = useNavigate();
 
   const categories = [
     { id: 'all', label: 'Všechny modely sklepa' },
-    { id: 'klenute', label: 'Klenuté sklepy' },
-    { id: 'ploche', label: 'Ploché sklepy' },
-    { id: 'vinotéky', label: 'Vinné archivy & Moduly' },
-    { id: 'nadrze', label: 'Jímky & Nádrže' }
+    { id: 'kupolove', label: 'Kupolové sklepy' },
+    { id: 'ploche-bok', label: 'Ploché – vstup z boku' },
+    { id: 'ploche-shora', label: 'Ploché – vstup shora' }
   ];
 
   const filteredProducts = PRODUCTS.filter((item) => {
@@ -41,11 +36,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ currency }) => {
     return matchesCategory && matchesSearch;
   });
 
-  const formattedPrice = (czk: number, eur: number) => {
-    if (currency === 'CZK') {
-      return `${czk.toLocaleString('cs-CZ')} Kč`;
-    }
-    return `${eur.toLocaleString('sk-SK')} €`;
+  const formattedPrice = (czk: number) => {
+    return `${czk.toLocaleString('cs-CZ')} Kč`;
   };
 
   return (
@@ -189,7 +181,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ currency }) => {
                   <div>
                     <span className="text-[11px] text-[#6D5D53] block">Cena bez DPH:</span>
                     <span className="text-xl font-bold font-mono text-[#795548]">
-                      {formattedPrice(prod.basePriceCZK, prod.basePriceEUR)}
+                      {formattedPrice(prod.basePriceCZK)}
                     </span>
                   </div>
                   <div className="text-right">

@@ -10,18 +10,13 @@ import { FaqSection } from '../components/FaqSection';
 import { ContactSection } from '../components/ContactSection';
 import { useNavigate } from 'react-router-dom';
 
-interface HomePageProps {
-  currency: 'CZK' | 'EUR';
-}
-
-export const HomePage: React.FC<HomePageProps> = ({ currency }) => {
+export const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className="space-y-0">
       {/* Hero Section */}
       <Hero
-        currency={currency}
         onOpenConfigurator={() => navigate('/konfigurator')}
         onScrollToPriceList={() => navigate('/cenik')}
         onOpenInquiry={() => navigate('/kontakt')}
@@ -29,20 +24,17 @@ export const HomePage: React.FC<HomePageProps> = ({ currency }) => {
 
       {/* Highlights Catalog */}
       <ProductCatalog
-        currency={currency}
         onSelectForConfig={(id) => navigate(`/konfigurator?model=${id}`)}
         onOpenInquiry={(name) => navigate(name ? `/kontakt?model=${encodeURIComponent(name)}` : '/kontakt')}
       />
 
       {/* 3D Configurator & Instant Price Calculator */}
       <ConfiguratorSection
-        currency={currency}
         onOpenInquiryWithConfig={(summary, total) => navigate('/kontakt')}
       />
 
       {/* Official Price List Preview */}
       <PriceListTable
-        currency={currency}
         onSelectForConfig={(id) => navigate(`/konfigurator?model=${id}`)}
         onOpenInquiry={() => navigate('/kontakt')}
       />

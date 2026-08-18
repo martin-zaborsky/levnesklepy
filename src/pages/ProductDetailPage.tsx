@@ -11,22 +11,15 @@ import {
   Hammer
 } from 'lucide-react';
 
-interface ProductDetailPageProps {
-  currency: 'CZK' | 'EUR';
-}
-
-export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ currency }) => {
+export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  
+
   const product = PRODUCTS.find((p) => p.id === id) || PRODUCTS[0];
   const [activeTab, setActiveTab] = useState<'blueprint' | 'photo'>('blueprint');
 
-  const formattedPrice = (czk: number, eur: number, vat = false) => {
+  const formattedPrice = (czk: number, vat = false) => {
     const factor = vat ? 1.21 : 1;
-    if (currency === 'CZK') {
-      return `${Math.round(czk * factor).toLocaleString('cs-CZ')} Kč`;
-    }
-    return `${Math.round(eur * factor).toLocaleString('sk-SK')} €`;
+    return `${Math.round(czk * factor).toLocaleString('cs-CZ')} Kč`;
   };
 
   return (
@@ -99,7 +92,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ currency }
                   <CellarBlueprintPreview
                     product={product}
                     selectedAccessories={ACCESSORIES.slice(0, 2)}
-                    currency={currency}
                   />
                 </div>
               ) : (
@@ -164,10 +156,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ currency }
                 <div>
                   <span className="text-xs text-[#6D5D53] block">Cena bez DPH:</span>
                   <span className="text-2xl sm:text-3xl font-bold font-mono text-[#795548]">
-                    {formattedPrice(product.basePriceCZK, product.basePriceEUR, false)}
+                    {formattedPrice(product.basePriceCZK, false)}
                   </span>
                   <span className="text-[11px] text-[#8D7B70] block mt-0.5">
-                    ({formattedPrice(product.basePriceCZK, product.basePriceEUR, true)} s DPH 21%)
+                    ({formattedPrice(product.basePriceCZK, true)} s DPH 21%)
                   </span>
                 </div>
                 <div className="text-right">
