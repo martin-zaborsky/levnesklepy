@@ -15,13 +15,11 @@ interface HeroProps {
   onOpenConfigurator: () => void;
   onScrollToPriceList: () => void;
   onOpenInquiry: () => void;
-  currency: 'CZK' | 'EUR';
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onOpenConfigurator,
-  onScrollToPriceList,
-  currency
+  onScrollToPriceList
 }) => {
   return (
     <section className="relative pt-10 pb-16 sm:pt-16 sm:pb-24 bg-[#FDFBF7] overflow-hidden">
@@ -172,9 +170,9 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
                 <div className="text-right">
                   <span className="text-xs font-extrabold text-[#795548] block font-mono">
-                    od {currency === 'CZK' ? '51 000 Kč' : '2 040 €'}
+                    od 34 000 Kč
                   </span>
-                  <span className="text-[10px] text-[#6D5D53]">vč. montáže</span>
+                  <span className="text-[10px] text-[#6D5D53]">bez DPH, vč. montáže</span>
                 </div>
               </div>
 

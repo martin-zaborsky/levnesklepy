@@ -9,15 +9,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-interface NavbarProps {
-  currency: 'CZK' | 'EUR';
-  setCurrency: (currency: 'CZK' | 'EUR') => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({
-  currency,
-  setCurrency
-}) => {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const navigate = useNavigate();
@@ -55,32 +47,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Currency selector toggle */}
-            <div className="flex items-center bg-[#E7E0D8] rounded-full p-0.5 text-[11px] font-bold">
-              <button
-                type="button"
-                onClick={() => setCurrency('CZK')}
-                className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
-                  currency === 'CZK'
-                    ? 'bg-[#795548] text-white shadow-xs'
-                    : 'text-[#5D4037] hover:text-[#3E2723]'
-                }`}
-              >
-                Kč (CZK)
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrency('EUR')}
-                className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
-                  currency === 'EUR'
-                    ? 'bg-[#795548] text-white shadow-xs'
-                    : 'text-[#5D4037] hover:text-[#3E2723]'
-                }`}
-              >
-                € (EUR)
-              </button>
-            </div>
-
             {/* Direct Telephone */}
             <a
               href="tel:+420797812444"

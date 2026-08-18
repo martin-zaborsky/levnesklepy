@@ -5,22 +5,21 @@ import { Thermometer, Droplets, ShieldCheck, Sparkles } from 'lucide-react';
 interface CellarBlueprintPreviewProps {
   product: Product;
   selectedAccessories: Accessory[];
-  currency: 'CZK' | 'EUR';
 }
 
 export const CellarBlueprintPreview: React.FC<CellarBlueprintPreviewProps> = ({
   product,
   selectedAccessories
 }) => {
-  const isVaulted = product.category === 'klenute' || product.category === 'vinotéky';
-  const hasTopEntrance = product.id.includes('horni-vstup');
-  
+  const isVaulted = product.category === 'kupolove';
+  const hasTopEntrance = product.category === 'ploche-shora';
+
   const hasStairs = selectedAccessories.some(a => a.category === 'schody');
-  const hasDoor = selectedAccessories.some(a => a.category === 'dvere');
-  const hasVent = selectedAccessories.some(a => a.category === 'ventilace');
-  const hasHydro = selectedAccessories.some(a => a.category === 'izolace');
-  const hasLighting = selectedAccessories.some(a => a.category === 'elektro');
-  const hasShelves = selectedAccessories.some(a => a.category === 'police');
+  const hasDoor = selectedAccessories.some(a => a.category === 'dvere' || a.category === 'predsin');
+  const hasHydro = false;
+  const hasLighting = false;
+  const hasShelves = false;
+  const hasVent = false;
 
   return (
     <div className="bg-white border border-[#E7E0D8] rounded-2xl p-4 sm:p-6 shadow-sm relative overflow-hidden flex flex-col justify-between">
@@ -271,7 +270,7 @@ export const CellarBlueprintPreview: React.FC<CellarBlueprintPreviewProps> = ({
                 width="40"
                 height="100"
                 rx="2"
-                fill={hasDoor ? (selectedAccessories.some(a => a.id.includes('dub')) ? '#5D4037' : '#795548') : '#F4F1EE'}
+                fill={hasDoor ? '#795548' : '#F4F1EE'}
                 stroke={hasDoor ? '#3E2723' : '#8D7B70'}
                 strokeWidth="2"
               />

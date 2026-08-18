@@ -14,13 +14,11 @@ import {
 } from 'lucide-react';
 
 interface ProductCatalogProps {
-  currency: 'CZK' | 'EUR';
   onSelectForConfig: (productId: string) => void;
   onOpenInquiry: (productName: string) => void;
 }
 
 export const ProductCatalog: React.FC<ProductCatalogProps> = ({
-  currency,
   onSelectForConfig
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -28,21 +26,17 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
   const categories = [
     { id: 'all', label: 'Všechny modely' },
-    { id: 'klenute', label: 'Klenuté sklepy' },
-    { id: 'ploche', label: 'Ploché sklepy' },
-    { id: 'vinotéky', label: 'Vinné & Modulární' },
-    { id: 'nadrze', label: 'Jímky & Nádrže' }
+    { id: 'kupolove', label: 'Kupolové sklepy' },
+    { id: 'ploche-bok', label: 'Ploché – vstup z boku' },
+    { id: 'ploche-shora', label: 'Ploché – vstup shora' }
   ];
 
   const filteredProducts = activeCategory === 'all'
     ? PRODUCTS
     : PRODUCTS.filter(p => p.category === activeCategory);
 
-  const formattedCurrency = (priceCZK: number, priceEUR: number) => {
-    if (currency === 'CZK') {
-      return `${priceCZK.toLocaleString('cs-CZ')} Kč`;
-    }
-    return `${priceEUR.toLocaleString('sk-SK')} €`;
+  const formattedCurrency = (priceCZK: number) => {
+    return `${priceCZK.toLocaleString('cs-CZ')} Kč`;
   };
 
   return (
@@ -160,7 +154,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     <div>
                       <span className="text-[10px] text-[#6D5D53] block">Cena skeletu bez DPH:</span>
                       <span className="text-xl font-bold font-mono text-[#795548]">
-                        {formattedCurrency(product.basePriceCZK, product.basePriceEUR)}
+                        {formattedCurrency(product.basePriceCZK)}
                       </span>
                     </div>
                     <span className="text-[11px] text-[#5D4037] font-semibold bg-[#E7E0D8] px-2.5 py-0.5 rounded-full border border-[#D7CDC1]">
@@ -282,7 +276,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               <div>
                 <span className="text-xs text-[#6D5D53] block">Základní cena:</span>
                 <span className="text-xl font-bold text-[#795548] font-mono">
-                  {formattedCurrency(modalProduct.basePriceCZK, modalProduct.basePriceEUR)} <span className="text-xs font-normal text-[#6D5D53]">bez DPH</span>
+                  {formattedCurrency(modalProduct.basePriceCZK)} <span className="text-xs font-normal text-[#6D5D53]">bez DPH</span>
                 </span>
               </div>
 

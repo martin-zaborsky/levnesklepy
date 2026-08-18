@@ -14,13 +14,10 @@ import {
 } from 'lucide-react';
 
 interface ConfiguratorSectionProps {
-  currency: 'CZK' | 'EUR';
   onOpenInquiryWithConfig?: (configSummary: string, totalPrice: number) => void;
 }
 
-export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
-  currency
-}) => {
+export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = () => {
   const [searchParams] = useSearchParams();
   const modelParam = searchParams.get('model');
 
@@ -37,9 +34,8 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
     }
   }, [modelParam]);
   const [selectedAccessoryIds, setSelectedAccessoryIds] = useState<string[]>([
-    'dvere-ocel-zateplene',
-    'ventilace-gravitacni',
-    'izolace-hydrostop-extra'
+    'rovne-dvere',
+    'schody'
   ]);
   const [selectedRegionIndex, setSelectedRegionIndex] = useState<number>(0);
   const [includeVat, setIncludeVat] = useState<boolean>(false);
@@ -55,11 +51,11 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
   const currentRegion = REGIONS_SHIPPING[selectedRegionIndex] || REGIONS_SHIPPING[0];
 
   // Pricing calculations
-  const basePrice = currency === 'CZK' ? currentProduct.basePriceCZK : currentProduct.basePriceEUR;
+  const basePrice = currentProduct.basePriceCZK;
   const accessoriesPrice = selectedAccessories.reduce((sum, item) => {
-    return sum + (currency === 'CZK' ? item.priceCZK : item.priceEUR);
+    return sum + item.priceCZK;
   }, 0);
-  const shippingPrice = currency === 'CZK' ? currentRegion.distancePriceCZK : currentRegion.distancePriceEUR;
+  const shippingPrice = currentRegion.distancePriceCZK;
   const assemblyPrice = 0; // Montáž ZDARMA!
 
   const subtotalWithoutVat = basePrice + accessoriesPrice + shippingPrice + assemblyPrice;
@@ -83,10 +79,7 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
   };
 
   const formattedCurrency = (amount: number) => {
-    if (currency === 'CZK') {
-      return `${Math.round(amount).toLocaleString('cs-CZ')} Kč`;
-    }
-    return `${Math.round(amount).toLocaleString('sk-SK')} €`;
+    return `${Math.round(amount).toLocaleString('cs-CZ')} Kč`;
   };
 
   return (
@@ -134,7 +127,7 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {PRODUCTS.map((prod) => {
                   const isSelected = prod.id === selectedProductId;
-                  const price = currency === 'CZK' ? prod.basePriceCZK : prod.basePriceEUR;
+                  const price = prod.basePriceCZK;
                   return (
                     <button
                       key={prod.id}
@@ -191,7 +184,7 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
               <div className="space-y-2.5">
                 {ACCESSORIES.map((acc) => {
                   const isChecked = selectedAccessoryIds.includes(acc.id);
-                  const price = currency === 'CZK' ? acc.priceCZK : acc.priceEUR;
+                  const price = acc.priceCZK;
                   return (
                     <div
                       key={acc.id}
@@ -257,7 +250,7 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
                 >
                   {REGIONS_SHIPPING.map((reg, index) => (
                     <option key={reg.name} value={index} className="bg-white text-[#3E2723]">
-                      {reg.name} ({formattedCurrency(currency === 'CZK' ? reg.distancePriceCZK : reg.distancePriceEUR)})
+                      {reg.name} ({formattedCurrency(reg.distancePriceCZK)})
                     </option>
                   ))}
                 </select>
@@ -277,7 +270,6 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
             <CellarBlueprintPreview
               product={currentProduct}
               selectedAccessories={selectedAccessories}
-              currency={currency}
             />
 
             {/* Price Summary Breakdown Card */}
@@ -321,7 +313,7 @@ export const ConfiguratorSection: React.FC<ConfiguratorSectionProps> = ({
                   <div key={acc.id} className="flex justify-between items-center text-[#6D5D53]">
                     <span className="truncate max-w-[200px]">+{acc.name}</span>
                     <span className="font-mono text-[#3E2723]">
-                      {formattedCurrency(currency === 'CZK' ? acc.priceCZK : acc.priceEUR)}
+                      {formattedCurrency(acc.priceCZK)}
                     </span>
                   </div>
                 ))}

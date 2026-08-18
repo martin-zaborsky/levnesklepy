@@ -11,31 +11,26 @@ import {
 } from 'lucide-react';
 
 interface PriceListTableProps {
-  currency: 'CZK' | 'EUR';
   onSelectForConfig: (productId: string) => void;
   onOpenInquiry: () => void;
 }
 
 export const PriceListTable: React.FC<PriceListTableProps> = ({
-  currency,
   onSelectForConfig,
   onOpenInquiry
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceTab, setPriceTab] = useState<'sklepy' | 'doplnky'>('sklepy');
 
-  const filteredProducts = PRODUCTS.filter(p => 
+  const filteredProducts = PRODUCTS.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.categoryLabel.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.dimensions.length.toString().includes(searchTerm)
   );
 
-  const formattedCurrency = (czk: number, eur: number, withVat = false) => {
+  const formattedCurrency = (czk: number, withVat = false) => {
     const factor = withVat ? 1.21 : 1;
-    if (currency === 'CZK') {
-      return `${Math.round(czk * factor).toLocaleString('cs-CZ')} Kč`;
-    }
-    return `${Math.round(eur * factor).toLocaleString('sk-SK')} €`;
+    return `${Math.round(czk * factor).toLocaleString('cs-CZ')} Kč`;
   };
 
   const handlePrint = () => {
@@ -167,12 +162,12 @@ export const PriceListTable: React.FC<PriceListTableProps> = ({
 
                       {/* Price without VAT */}
                       <td className="py-4 px-3 text-right font-mono font-bold text-base text-[#795548]">
-                        {formattedCurrency(p.basePriceCZK, p.basePriceEUR, false)}
+                        {formattedCurrency(p.basePriceCZK, false)}
                       </td>
 
                       {/* Price with VAT */}
                       <td className="py-4 px-3 text-right font-mono text-[#6D5D53] text-xs">
-                        {formattedCurrency(p.basePriceCZK, p.basePriceEUR, true)}
+                        {formattedCurrency(p.basePriceCZK, true)}
                       </td>
 
                       {/* Action */}
@@ -220,10 +215,10 @@ export const PriceListTable: React.FC<PriceListTableProps> = ({
                         {acc.description}
                       </td>
                       <td className="py-4 px-3 text-right font-mono font-bold text-[#795548] text-sm">
-                        {formattedCurrency(acc.priceCZK, acc.priceEUR, false)}
+                        {formattedCurrency(acc.priceCZK, false)}
                       </td>
                       <td className="py-4 px-4 sm:px-6 text-right font-mono text-[#6D5D53] text-xs">
-                        {formattedCurrency(acc.priceCZK, acc.priceEUR, true)}
+                        {formattedCurrency(acc.priceCZK, true)}
                       </td>
                     </tr>
                   ))}
