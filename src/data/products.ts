@@ -156,6 +156,29 @@ export const PRODUCTS: Product[] = [
     imageUrl: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1000&q=80',
     stockStatus: 'Skladem – dodání do 2-4 dnů'
   },
+  {
+    id: 'kupolovy-390-bocni-vstup',
+    name: 'Kupolový sklep 390 s bočním vstupem',
+    category: 'kupolove',
+    categoryLabel: 'Kupolové sklepy',
+    subtitle: 'Kupolový sklep s délkou 390 cm a vstupem z delší strany',
+    description: 'Varianta kupolového sklepa 390 cm se vstupem z delší (boční) strany místo tradičního čelního vstupu – vhodné pro atypické umístění na pozemku.',
+    basePriceCZK: 60500,
+    dimensions: { length: 390, width: 240, height: 250, innerLength: 370, innerWidth: 220, innerHeight: 230 },
+    volumeM3: 23.4,
+    weightTons: 12.9,
+    wallThicknessCm: 10,
+    concreteClass: 'Železobeton B35',
+    features: [
+      'Vstup z delší (boční) strany sklepa',
+      'Kupolovitý strop pro přirozené proudění vzduchu',
+      'Vyztužený beton B35',
+      'Dodání skladem do 2–4 pracovních dnů'
+    ],
+    recommendedFor: ['Atypické umístění na pozemku', 'Uskladnění úrody', 'Domácí sklípek'],
+    imageUrl: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=1000&q=80',
+    stockStatus: 'Skladem – dodání do 2-4 dnů'
+  },
 
   // ── PLOCHÉ SKLEPY – VSTUP Z BOKU ────────────────────────────────
   {
